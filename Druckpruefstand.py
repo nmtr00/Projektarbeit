@@ -33,3 +33,5 @@ plt.yticks(range(int(min(df['Kraft'])), int(max(df['Kraft'])) + 1, 200))
 
 
 plt.grid(True)
+
+plt.show()
