@@ -16,8 +16,8 @@ contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPL
 # Sort contours by their x-coordinate
 contours = sorted(contours, key=lambda x: cv2.boundingRect(x)[0])
 print("Contours:")
-for idx, contour in enumerate(contours):
-    print("Contour", idx)
+# for idx, contour in enumerate(contours):
+#     print("Contour", idx)
 # Identify left and right contours
 left_contour = contours[0]
 right_contour = contours[1]
