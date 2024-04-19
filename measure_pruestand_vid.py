@@ -1,8 +1,13 @@
 import cv2
 import numpy as np
 from object_detector import *
-img = cv2.imread("test2.tiff")
+# Load the video file
+cap = cv2.VideoCapture('your_video_file.mp4')  # Replace 'your_video_file.mp4' with your video file path
 
+# Check if the video file opened successfully
+if not cap.isOpened():
+    print("Error: Could not open video file.")
+    exit()
 #Load Object Detector
 
 detector = HomogeneousBgDetector()
@@ -34,8 +39,8 @@ contours = sorted(contours, key = lambda x: cv2.boundingRect(x)[0])
 #List contours
 for idx, contour in enumerate(contours):
     contours_idx.append(idx)
-    print("Contours:", idx)
-print(contours_idx)
+#     print("Contours:", idx)
+# print(contours_idx)
 
 if len(contours_idx)>>1:
     # Identify left and right contours
