@@ -55,9 +55,6 @@ if len(contours_idx)>>1:
 
     # Calculate distance between two points
     distance_pixels = np.sqrt((right_leftmost[0] - left_rightmost[0])**2 + (right_leftmost[1] - left_rightmost[1])**2)
-    scaling = 30
-    distance_mm = distance_pixels / scaling
-    cv2.putText(img, f'{distance_mm} mm', (right_leftmost[0], left_rightmost[1] + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2) #Add measurement on the red line
 
     print("Distance between points in pixels:", distance_pixels)
 # Save the output image as JPG
