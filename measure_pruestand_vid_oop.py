@@ -41,7 +41,7 @@ while True:
     print(contours_idx)
 
 
-    if len(contours_idx)>>1:
+    if len(contours_idx)>1:
         # Identify left and right contours
         left_contour, right_contour = analyzer.get_left_and_right_contours(contours)
 
@@ -49,14 +49,14 @@ while True:
         measure = PointMeasure()
         distance = measure.distance_width(frame, 30, left_contour, right_contour)
         # print("Distance between points in pixels:", distance)
-        cv2.imshow("Image", frame)  #Display the frame
+    cv2.imshow("Image", frame)  #Display the frame
 
-        # Write the processed frame to the output video
-        out.write(frame)
+    # Write the processed frame to the output video
+    out.write(frame)
 
-        # Check for key press; If 'q' is pressed, exit the loop
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+    # Check for key press; If 'q' is pressed, exit the loop
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break   
 # Release the video capture object and close all windows
 cap.release()
 out.release()

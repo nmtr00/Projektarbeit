@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 class ContourAnalyzer():
     def __init__(self):
         pass
@@ -24,7 +25,7 @@ class ContourAnalyzer():
         #List contours
         for idx, contour in enumerate(contours):
             contours_idx.append(idx)
-            print("Contours:", idx)
+            # print("Contours:", idx)
         
         return contours_idx
     

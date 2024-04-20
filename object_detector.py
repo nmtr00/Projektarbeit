@@ -18,6 +18,6 @@ class HomogeneousBgDetector():
 
         for cnt in contours:
             area = cv2.contourArea(cnt)
-            if area > 7000:
+            if area > 4000:
                 object_contours.append(cnt)
         return object_contours
