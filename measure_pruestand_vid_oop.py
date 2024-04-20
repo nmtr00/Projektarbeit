@@ -11,7 +11,7 @@ out, cap = video_format(video_path)
 detector = HomogeneousBgDetector()
 
 # Define cropping parameters (x, y, width, height)
-x, y, w, h = 200, 800, 1500, 200 
+x, y, w, h = 150, 800, 1600, 180 
 while True:
     #Read a frame from the vieeo
     ret, frame = cap.read()
@@ -21,16 +21,16 @@ while True:
         break
 
     # Crop the frame
-    cropped_frame = frame[y:y+h, x:x+w]
+    cropped_frame1 = frame[y:y+h, x:x+w]
    
     # Detect objects
-    contours = detector.detect_object(cropped_frame)
+    contours = detector.detect_object(cropped_frame1)
 
     # Instantiate ContourAnalyzer
     analyzer = ContourAnalyzer()
 
-    # Get contour indices
-    contours_idx = analyzer.get_contour_indices(cropped_frame, contours)
+    # Get contour indicesq
+    contours_idx = analyzer.get_contour_indices(cropped_frame1, contours)
     print(contours_idx)
 
 
@@ -40,7 +40,7 @@ while True:
 
         #Measure distance between two points
         measure = PointMeasure()
-        distance = measure.distance_width(cropped_frame, 30, left_contour, right_contour)
+        distance = measure.distance_width(cropped_frame1, 30, left_contour, right_contour)
         # print("Distance between points in pixels:", distance)
     # Draw a rectangle around the cropped region on the original frame
     cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
