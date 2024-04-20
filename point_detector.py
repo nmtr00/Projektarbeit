@@ -4,6 +4,7 @@ class PointMeasure():
     def __int__(self):
         pass
     def distance_width(self, img, scaling, left, right):
+        #Identify points
         left_point = tuple(left[left[:,:, 0].argmax()][0])
         right_point = tuple(right[right[:,:, 0].argmin()][0])
 
