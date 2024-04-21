@@ -1,6 +1,6 @@
 import cv2
 import os
-def video_format(video):
+def video_format(video, name, output):
     cap = cv2.VideoCapture(video)  # Replace 'your_video_file.mp4' with your video file path
 
     # Check if the video file opened successfully
@@ -15,8 +15,9 @@ def video_format(video):
 
     # Define the codec and create VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter('measured.avi', fourcc, fps, (frame_width, frame_height))
-    return out, cap
+    out = cv2.VideoWriter(f'{output}\ANALYZED_{name}', fourcc, fps, (frame_width, frame_height))
+    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    return out, cap, total_frames
 
 
         
