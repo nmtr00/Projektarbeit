@@ -3,7 +3,6 @@ import os
 from object_detector import *
 from contours_identifier import *
 from point_detector import *
-from video_format import video_format
 
 #Parameters
 input_folder = "O:\Projektarbeit\Converted to Mask with ImageJ"
