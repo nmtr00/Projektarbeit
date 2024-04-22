@@ -4,13 +4,15 @@ class HomogeneousBgDetector():
         pass
     def detect_object(self, frame, min_area):
         #Convert to gray scale
-        # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        gray = cv2.cvtColor(frame,cv2.COLOR_RGB2GRAY)
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
         #Create a Mask with adaptive threshold
-        mask = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 19, 19)     
-        #cv2.imshow("mask", mask)
+        mask = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 19, 21)     
+        # cv2.imshow("mask", mask)
         #Find contours
         contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        
         object_contours = []
 
         for cnt in contours:

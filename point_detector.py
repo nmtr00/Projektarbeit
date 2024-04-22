@@ -46,3 +46,7 @@ class PointMeasure():
         cv2.putText(img, f'{distance_mm} mm', (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 5) #Add measurement on the red line
 
         return
+    def aruco_scale(self):
+        parameter = cv2.aruco.DetectorParameters()
+        aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.D)
+        return
