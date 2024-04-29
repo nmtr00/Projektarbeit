@@ -30,7 +30,7 @@ class ContourAnalyzer():
         # Sort contours by y-coordinate of bounding rectangle's topmost point
         sorted_contours = sorted(contours, key=lambda x: cv2.boundingRect(x)[0])
         # Take the two highest contours
-        right = sorted_contours[1]
+        right = sorted_contours[-1]
         left = sorted_contours[0]
         return left, right
     

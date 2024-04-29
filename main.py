@@ -6,12 +6,12 @@ from contours_identifier import *
 from point_detector import *
 from tqdm import tqdm
 #Parameters
-input_folder = "O:\Projektarbeit\Converted to Mask with ImageJ"
-output_folder = "O:\Projektarbeit\Analyzed"
-output_data = "O:\Projektarbeit\Measured_values"
+input_folder = "O:\Projektarbeit\/2504\Masked"
+output_folder = "O:\Projektarbeit\/2504\Analyzed"
+output_data = "O:\Projektarbeit\/2504\Measured_values"
 pixels_per_mm =27.6063
 x_correction = -2
-min_area1 = 5000
+min_area1 = 4000
 
 
 def video_format(video, name, output):
@@ -106,9 +106,16 @@ def process_videos(video_path, filename, out, cap, total_frames, filename_withou
             if distance_mm < 20:
                 distance_mm = 0
                 distance_pixels = 0
+                left_x = 0
+                right_x = 0
         else:
             distance_mm = 0
             distance_pixels = 0
+            if distance_mm < 20:
+                distance_mm = 0
+                distance_pixels = 0
+                left_x = 0
+                right_x = 0
          # Get frame number
         frame_number = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
         fps = cap.get(cv2.CAP_PROP_FPS)
