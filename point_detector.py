@@ -22,7 +22,7 @@ class PointMeasure():
         distance_pixels = np.sqrt((right_point[0] - left_point[0])**2 + (right_point[1] - left_point[1])**2)
         distance_mm = distance_pixels / scaling
         cv2.putText(img, f'{distance_mm} mm', (left_point[0], right_point[1] -10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 5) #Add measurement on the red line
-        return distance_mm, distance_pixels
+        return distance_mm, distance_pixels, int(left_point[0]), int(right_point[0])
     def distance_height(self, img, scaling, contour):
         
         # Calculate moments of the contour
