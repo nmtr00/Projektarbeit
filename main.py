@@ -6,12 +6,25 @@ from contours_identifier import *
 from point_detector import *
 from tqdm import tqdm
 #Parameters
-input_folder = "O:\Projektarbeit\/2504\Masked"
-output_folder = "O:\Projektarbeit\/2504\Analyzed"
-output_data = "O:\Projektarbeit\/2504\Measured_values"
+main_folder = "O:\Projektarbeit\/1904"
+input_folder = f"{main_folder}\Masked"
+output_folder = f"{main_folder}\Analyzed"
+output_data = f"{main_folder}\Measured_values"
 pixels_per_mm =27.6063
 x_correction = -2
 min_area1 = 4000
+def main():
+    for filename in os.listdir(input_folder):
+        if filename.endswith(".avi") or filename.endswith(".mp4"):
+            video_path = os.path.join(input_folder, filename)
+            print("Processing video:", filename)
+            out, cap, total_frames = video_format(video_path, filename, output_folder)
+            filename_without_extension = os.path.splitext(filename)[0]
+            total_frames_for_loading_bar = min(total_frames, 200)  # Set a maximum of 200 frames for the loading bar
+            with tqdm(total=total_frames_for_loading_bar, desc="Processing", unit="frames", bar_format="{l_bar}{bar}{r_bar}", ncols=100, colour='#9A7D0A') as loading_bar:  # Create yellow loading bar
+                process_videos(video_path, filename, out, cap, total_frames, filename_without_extension, loading_bar)
+
+            # No need to close loading_bar here, it's automatically closed when exiting the "with" block
 
 
 def video_format(video, name, output):
@@ -71,7 +84,7 @@ def process_videos(video_path, filename, out, cap, total_frames, filename_withou
 
 
     # Define cropping parameters (x, y, width, height)
-    x1, y1, w1, h1 = 75, 600, 1750, 180
+    x1, y1, w1, h1 = 70, 600, 1760, 180
     x2, y2, w2, h2 = 925, 925, 50, 275
     while True:
         #Read a frame from the vieeo
@@ -146,10 +159,11 @@ def process_videos(video_path, filename, out, cap, total_frames, filename_withou
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break   
     # Release the video capture object and close all windows
+    loading_bar.close()
     cap.release()
     out.release()
     cv2.destroyAllWindows()
-   
+    
 
 
 # Delete all files in the output folder
@@ -168,18 +182,6 @@ delete_files_in_directory(output_data)
 #             process_videos(video_path, filename, out, cap, total_frames, filename_without_extension, loading_bar)
             
 #             loading_bar.close()  # Close the progress bar after processing
-def main():
-    for filename in os.listdir(input_folder):
-        if filename.endswith(".avi") or filename.endswith(".mp4"):
-            video_path = os.path.join(input_folder, filename)
-            print("Processing video:", filename)
-            out, cap, total_frames = video_format(video_path, filename, output_folder)
-            filename_without_extension = os.path.splitext(filename)[0]
-            total_frames_for_loading_bar = min(total_frames, 200)  # Set a maximum of 200 frames for the loading bar
-            with tqdm(total=total_frames_for_loading_bar, desc="Processing", unit="frames", bar_format="{l_bar}{bar}{r_bar}", ncols=100) as loading_bar:  # Create yellow loading bar
-                process_videos(video_path, filename, out, cap, total_frames, filename_without_extension, loading_bar)
-
-            # No need to close loading_bar here, it's automatically closed when exiting the "with" block
 
 
 # Call the main function to start processing
