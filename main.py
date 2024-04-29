@@ -10,7 +10,7 @@ input_folder = "O:\Projektarbeit\Converted to Mask with ImageJ"
 output_folder = "O:\Projektarbeit\Analyzed"
 output_data = "O:\Projektarbeit\Measured_values"
 pixels_per_mm =27.6063
-x_correction = 0
+x_correction = -2
 min_area1 = 5000
 
 
