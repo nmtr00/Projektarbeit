@@ -6,13 +6,18 @@ from contours_identifier import *
 from point_detector import *
 from tqdm import tqdm
 #Parameters
-main_folder = "O:\Projektarbeit\/1904"
-input_folder = f"{main_folder}\Masked"
+main_folder = "O:\Projektarbeit\/2504"
+input_folder = f"{main_folder}\Recorded"
 output_folder = f"{main_folder}\Analyzed"
 output_data = f"{main_folder}\Measured_values"
-pixels_per_mm =27.6063
+pixels_per_mm =29.6
 x_correction = -2
-min_area1 = 4000
+min_area1 = 7000
+mask_min1, mask_max1 = 0, 55
+
+
+
+
 def main():
     for filename in os.listdir(input_folder):
         if filename.endswith(".avi") or filename.endswith(".mp4"):
@@ -60,7 +65,7 @@ def get_data(filename, output_folder, frame_number, distance_pixels, distance_mm
             writer.writerow(['Timestamp', 'Distance (mm)', 'Distance (pixels)', 'Left Point', 'Right Point'])
         # Write the timestamp and distance value
         timestamp = frame_number / fps
-        writer.writerow([timestamp, distance_pixels, distance_mm, left_x, right_x])
+        writer.writerow([timestamp, distance_mm, distance_pixels, left_x, right_x])
 
 # Function to delete all files in a directory
 def delete_files_in_directory(directory):
@@ -84,7 +89,7 @@ def process_videos(video_path, filename, out, cap, total_frames, filename_withou
 
 
     # Define cropping parameters (x, y, width, height)
-    x1, y1, w1, h1 = 70, 600, 1760, 180
+    x1, y1, w1, h1 = 250, 650, 1400, 130
     x2, y2, w2, h2 = 925, 925, 50, 275
     while True:
         #Read a frame from the vieeo
@@ -97,7 +102,7 @@ def process_videos(video_path, filename, out, cap, total_frames, filename_withou
         #Detect contours
         detector_width = HomogeneousBgDetector() #Load Object Detector
         
-        contours_width = detector_width.detect_object(cropped_frame1, min_area1) # Detect objects
+        contours_width = detector_width.detect_object(cropped_frame1, min_area1, mask_min1, mask_max1) # Detect objects
 
         # detector_height = HomogeneousBgDetector()
         # contour_height = detector_height.detect_object(cropped_frame2, 2000)
