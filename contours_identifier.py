@@ -8,7 +8,7 @@ class ContourAnalyzer():
         contours_idx = []
         for cnt in contours:
             #Draw polygon for boundary contours with blue lines
-            cv2.polylines(img, [cnt], True, (255, 0, 0), 0)
+            cv2.polylines(img, [cnt], True, (255, 0, 0), 2)
 
             # #Get rectangle
             # rect = cv2.minAreaRect(cnt)
@@ -28,10 +28,10 @@ class ContourAnalyzer():
     
     def get_left_and_right_contours(self, contours):
         # Sort contours by y-coordinate of bounding rectangle's topmost point
-        sorted_contours = sorted(contours, key=lambda x: cv2.boundingRect(x)[1])
+        sorted_contours = sorted(contours, key=lambda x: cv2.boundingRect(x)[0])
         # Take the two highest contours
+        right = sorted_contours[-1]
         left = sorted_contours[0]
-        right = sorted_contours[1]
         return left, right
     
     def get_bottom_contour(self, contours):
