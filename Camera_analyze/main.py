@@ -175,19 +175,6 @@ def process_videos(video_path, filename, out, cap, total_frames, filename_withou
 delete_files_in_directory(output_folder)
 delete_files_in_directory(output_data)
 
-# def main():
-#     for filename in os.listdir(input_folder):
-#         if filename.endswith(".avi") or filename.endswith(".mp4"):
-#             video_path = os.path.join(input_folder, filename)
-#             print("Processing video:", filename)
-#             out, cap, total_frames = video_format(video_path, filename, output_folder)
-#             filename_without_extension = os.path.splitext(filename)[0]
-#             loading_bar = tqdm(total=total_frames, desc="Processing", unit="frames")  # Create loading bar
-            
-#             process_videos(video_path, filename, out, cap, total_frames, filename_without_extension, loading_bar)
-            
-#             loading_bar.close()  # Close the progress bar after processing
-
 
 # Call the main function to start processing
 if __name__ == "__main__":
