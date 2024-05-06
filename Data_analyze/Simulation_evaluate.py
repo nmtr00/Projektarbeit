@@ -51,6 +51,7 @@ with open(r"C:\Abaqus\press\Neo_1800000_6,5E-7.csv") as file:
     rows = []
     for line in file:
         # Split the line into two values
+        
         value1, value2 = line.strip().split()
         # Convert the scientific notation to decimal for value1
         value1_decimal = sci_to_dec(value1)
