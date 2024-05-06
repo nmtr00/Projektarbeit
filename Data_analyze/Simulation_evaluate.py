@@ -22,11 +22,8 @@ def sci_to_dec1(value):
         # If conversion fails, return the original value as a float
         return float(value)
 
-def main():
 
 
-
-# Open the report file
 with open(r"C:\Abaqus\press\Neo_1700000_6,5E-7.csv") as file:
     # Read each line of the report
     rows = []
