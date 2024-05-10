@@ -1,0 +1,5 @@
+1. Prüfstandaufbau mit CAD
+2. Messung mit Monochrome Kamera
+3. SImulation mit abaqus
+4. "Parametric studies" um die optimal parameter zu finden
+5. request access for abaqus license on HPC
