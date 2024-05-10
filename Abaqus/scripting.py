@@ -12,6 +12,19 @@ from sketch import *
 from visualization import *
 from connectorBehavior import *
 
+#Parameters
+
+Hyperelastic = getInputs(fields=(('C10: C10 Kennwert', '1600000.0'), ('D1: D1 Kennwert', '6.5e-07')), 
+                         label='Neo Hook Models Kennwerte:',
+                         dialogTitle='Neo-Hook Kennwerte')
+C10 = float (Hyperelastic[0])
+D1 = float (Hyperelastic[1])
+
+Elastic = getInputs(fields=(('E: E-Modul', '210000000000.0'), ('nu: Querkontraktionszahl', '0.3')), 
+                         label='Stahl Kennwerte:',
+                         dialogTitle='Elastische Kennwerte')
+E1 = float (Elastic[0])
+N1 = float (Elastic[1])
 
 #Create 2D Models
 mdb.models['Model-1'].ConstrainedSketch(name='__profile__', sheetSize=0.2)
@@ -168,11 +181,11 @@ del mdb.models['Model-1'].sketches['__profile__']
 mdb.models['Model-1'].Material(name='elastomer')
 mdb.models['Model-1'].materials['elastomer'].Density(table=((1175.0, ), ))
 mdb.models['Model-1'].materials['elastomer'].Hyperelastic(materialType=
-    ISOTROPIC, table=((1600000.0, 6.5e-07), ), testData=OFF, type=NEO_HOOKE, 
+    ISOTROPIC, table=((C10, D1), ), testData=OFF, type=NEO_HOOKE, 
     volumetricResponse=VOLUMETRIC_DATA)
 mdb.models['Model-1'].Material(name='steel')
 mdb.models['Model-1'].materials['steel'].Density(table=((7850.0, ), ))
-mdb.models['Model-1'].materials['steel'].Elastic(table=((210000000000.0, 0.3), 
+mdb.models['Model-1'].materials['steel'].Elastic(table=((E1, N1), 
     ))
 mdb.models['Model-1'].HomogeneousSolidSection(material='elastomer', name=
     'elastomer', thickness=None)
@@ -199,7 +212,7 @@ mdb.models['Model-1'].parts['Stahlblech'].SectionAssignment(offset=0.0, offsetFi
 #Generate Mesh
 
 mdb.models['Model-1'].parts['Beschichtung'].seedPart(deviationFactor=0.1, 
-    minSizeFactor=0.1, size=0.0003)
+    minSizeFactor=0.1, size=0.0013)
 mdb.models['Model-1'].parts['Beschichtung'].generateMesh()
 mdb.models['Model-1'].parts['Stahlblech'].seedPart(deviationFactor=0.1, 
     minSizeFactor=0.1, size=0.001)
@@ -209,7 +222,7 @@ mdb.models['Model-1'].parts['Stahlblech'].seedPart(deviationFactor=0.1,
     minSizeFactor=0.1, size=0.01)
 mdb.models['Model-1'].parts['Stahlblech'].generateMesh()
 
-#Setting nodes
+#Boundary condition for Platte
 
 mdb.models['Model-1'].parts['Stahlblech'].Set(name='all_nodes', nodes=
     mdb.models['Model-1'].parts['Stahlblech'].nodes.getSequenceFromMask(mask=(
@@ -217,3 +230,100 @@ mdb.models['Model-1'].parts['Stahlblech'].Set(name='all_nodes', nodes=
 mdb.models['Model-1'].parts['Stahlblech'].Set(name='one_node', nodes=
     mdb.models['Model-1'].parts['Stahlblech'].nodes.getSequenceFromMask(mask=(
     '[#2 ]', ), ))
+
+# Defining simulation step
+
+mdb.models['Model-1'].StaticStep(initialInc=0.01, maxInc=0.01, name='contact', 
+    nlgeom=ON, previous='Initial')
+mdb.models['Model-1'].StaticStep(initialInc=0.01, maxInc=0.01, name='press', 
+    previous='contact')
+
+# Creating instances:
+mdb.models['Model-1'].rootAssembly.DatumCsysByDefault(CARTESIAN)
+mdb.models['Model-1'].rootAssembly.Instance(dependent=ON, name='Stahlblech-1', part=
+    mdb.models['Model-1'].parts['Stahlblech'])
+mdb.models['Model-1'].rootAssembly.Instance(dependent=ON, name='Beschichtung-1', part=
+    mdb.models['Model-1'].parts['Beschichtung'])
+mdb.models['Model-1'].rootAssembly.instances['Beschichtung-1'].translate(vector=(0.0, 
+    0.0, 0.0))
+
+
+# Defining contact properties:
+mdb.models['Model-1'].rootAssembly.CoincidentPoint(fixedPoint=
+    mdb.models['Model-1'].rootAssembly.instances['Stahlblech-1'].vertices[1], 
+    movablePoint=
+    mdb.models['Model-1'].rootAssembly.instances['Beschichtung-1'].vertices[0])
+mdb.models['Model-1'].ContactProperty('frict')
+mdb.models['Model-1'].interactionProperties['frict'].TangentialBehavior(
+    dependencies=0, directionality=ISOTROPIC, elasticSlipStiffness=None, 
+    formulation=PENALTY, fraction=0.005, maximumElasticSlip=FRACTION, 
+    pressureDependency=OFF, shearStressLimit=None, slipRateDependency=OFF, 
+    table=((0.3, ), ), temperatureDependency=OFF)
+
+
+# Creating contact surfaces:
+
+mdb.models['Model-1'].rootAssembly.Surface(name='m_Surf-1', side1Edges=
+    mdb.models['Model-1'].rootAssembly.instances['Stahlblech-1'].edges.getSequenceFromMask(
+    ('[#42 ]', ), ))
+mdb.models['Model-1'].rootAssembly.Surface(name='s_Surf-1', side1Edges=
+    mdb.models['Model-1'].rootAssembly.instances['Beschichtung-1'].edges.getSequenceFromMask(
+    ('[#18 ]', ), ))
+
+
+# Defining contact interactions:
+
+mdb.models['Model-1'].SurfaceToSurfaceContactStd(adjustMethod=NONE, 
+    clearanceRegion=None, createStepName='press', datumAxis=None, 
+    initialClearance=OMIT, interactionProperty='frict', main=
+    mdb.models['Model-1'].rootAssembly.surfaces['m_Surf-1'], name='Int-1', 
+    secondary=mdb.models['Model-1'].rootAssembly.surfaces['s_Surf-1'], sliding=
+    FINITE, thickness=ON)
+
+
+
+# Applying boundary conditions:
+mdb.models['Model-1'].rootAssembly.Set(edges=
+    mdb.models['Model-1'].rootAssembly.instances['Beschichtung-1'].edges.getSequenceFromMask(
+    ('[#42 ]', ), ), name='Set-1')
+mdb.models['Model-1'].EncastreBC(createStepName='Initial', localCsys=None, 
+    name='fix_inner_layer', region=
+    mdb.models['Model-1'].rootAssembly.sets['Set-1'])
+mdb.models['Model-1'].XsymmBC(createStepName='Initial', localCsys=None, name=
+    'fix_all_nodes', region=
+    mdb.models['Model-1'].rootAssembly.instances['Stahlblech-1'].sets['all_nodes'])
+mdb.models['Model-1'].rootAssembly.Set(edges=
+    mdb.models['Model-1'].rootAssembly.instances['Stahlblech-1'].edges.getSequenceFromMask(
+    ('[#7e ]', ), ), name='Set-2')
+mdb.models['Model-1'].XsymmBC(createStepName='Initial', localCsys=None, name=
+    'fix_all_sides', region=mdb.models['Model-1'].rootAssembly.sets['Set-2'])
+mdb.models['Model-1'].rootAssembly.Set(edges=
+    mdb.models['Model-1'].rootAssembly.instances['Stahlblech-1'].edges.getSequenceFromMask(
+    ('[#42 ]', ), ), name='Set-3')
+mdb.models['Model-1'].DisplacementBC(amplitude=UNSET, createStepName='contact', 
+    distributionType=UNIFORM, fieldName='', fixed=OFF, localCsys=None, name=
+    'BC-4', region=mdb.models['Model-1'].rootAssembly.sets['Set-3'], u1=0.0, 
+    u2=5.86e-05, ur3=0.0)
+mdb.models['Model-1'].boundaryConditions.changeKey(fromName='BC-4', toName=
+    'contact')
+mdb.models['Model-1'].rootAssembly.Set(edges=
+    mdb.models['Model-1'].rootAssembly.instances['Stahlblech-1'].edges.getSequenceFromMask(
+    ('[#42 ]', ), ), name='Set-4')
+mdb.models['Model-1'].DisplacementBC(amplitude=UNSET, createStepName='contact', 
+    distributionType=UNIFORM, fieldName='', fixed=OFF, localCsys=None, name=
+    'press', region=mdb.models['Model-1'].rootAssembly.sets['Set-4'], u1=0.0, 
+    u2=0.000637, ur3=0.0)
+mdb.models['Model-1'].boundaryConditions['contact'].deactivate('press')
+
+
+# # Defining output requests:
+
+# mdb.models['Model-1'].fieldOutputRequests['F-Output-1'].setValuesInStep(
+#     stepName='press', variables=('U', 'RF'))
+# del mdb.models['Model-1'].historyOutputRequests['H-Output-1']
+# mdb.models['Model-1'].HistoryOutputRequest(createStepName='press', name=
+#     'H-Output-1', rebar=EXCLUDE, region=
+#     mdb.models['Model-1'].rootAssembly.allInstances['Stahlblech-1'].sets['one_node']
+#     , sectionPoints=DEFAULT, variables=('U2', 'RF2'))
+
+# Submitting the job
