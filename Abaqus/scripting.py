@@ -26,6 +26,8 @@ Elastic = getInputs(fields=(('E: E-Modul', '210000000000.0'), ('nu: Querkontrakt
 E1 = float (Elastic[0])
 N1 = float (Elastic[1])
 
+
+
 #Create 2D Models
 mdb.models['Model-1'].ConstrainedSketch(name='__profile__', sheetSize=0.2)
 mdb.models['Model-1'].sketches['__profile__'].sketchOptions.setValues(
@@ -327,3 +329,12 @@ mdb.models['Model-1'].boundaryConditions['contact'].deactivate('press')
 #     , sectionPoints=DEFAULT, variables=('U2', 'RF2'))
 
 # Submitting the job
+
+mdb.Job(atTime=None, contactPrint=OFF, description='', echoPrint=OFF, 
+    explicitPrecision=SINGLE, getMemoryFromAnalysis=True, historyPrint=OFF, 
+    memory=90, memoryUnits=PERCENTAGE, model='Model-1', modelPrint=OFF, 
+    multiprocessingMode=DEFAULT, name='Job-1', nodalOutputPrecision=SINGLE, 
+    numCpus=4, numDomains=4, numGPUs=0, numThreadsPerMpiProcess=1, queue=None, 
+    resultsFormat=ODB, scratch='', type=ANALYSIS, userSubroutine='', waitHours=
+    0, waitMinutes=0)
+mdb.jobs['Job-1'].submit(consistencyChecking=OFF)
