@@ -1,0 +1,21 @@
+# CREATE STUDY
+cbeam=ParStudy(par=('E', 'nu'))
+# DEFINE THE PARAMETERS
+cbeam.define(DISCRETE, par='E', domain = (100e9, 200e9, 300e9))
+cbeam.define(CONTINUOUS, par = 'nu', domain = (0.15, 0.35))
+#sampling
+cbeam.sample(INTERVAL, par = 'E', interval = 1)
+cbeam.sample(NUMBER, par = 'nu', number = 2)
+#combine the samples
+cbeam.combine(MESH, name = 'cantilever')
+#generate analysis job data
+cbeam.generate(template = 'PSE')
+#execute the jobs
+cbeam.execute(ALL, execOptions='cpus=6')
+#read the results from ODB and report
+cbeam.output(step = 1, file = ODB)
+cbeam.gather(results = 'VDISP', variable = 'U2', node = 154, request = HISTORY, instance = "Part-1-1")
+cbeam.gather(results = 'FORCE', variable = 'RF2', node = 154, request = HISTORY, instance = "Part-1-1")
+cbeam.report(FILE, results = ('VDISP', 'FORCE'), par = ('E', 'nu'), file ='cbeam.PSE.psr')
+
+

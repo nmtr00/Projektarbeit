@@ -1520,3 +1520,24 @@ mdb.jobs['press1']._Message(COMPLETED, {'phase': STANDARD_PHASE,
 mdb.jobs['press1']._Message(JOB_COMPLETED, {'time': 'Fri May 10 13:39:01 2024', 
     'jobName': 'press1'})
 # Save by AZL on 2024_05_10-13.39.49; build 2022 2021_09_15-19.57.30 176069
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].parts['plate'].deleteMesh()
+mdb.models['Model-1'].parts['plate'].seedPart(deviationFactor=0.1, 
+    minSizeFactor=0.1, size=0.0001)
+mdb.models['Model-1'].parts['plate'].seedPart(deviationFactor=0.1, 
+    minSizeFactor=0.1, size=0.001)
+mdb.models['Model-1'].parts['plate'].generateMesh()
+mdb.models['Model-1'].rootAssembly.regenerate()
+# Save by caber on 2024_05_12-23.55.32; build 2022 2021_09_15-19.57.30 176069
