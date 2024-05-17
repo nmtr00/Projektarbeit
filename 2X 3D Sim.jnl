@@ -1,0 +1,1181 @@
+# Save by pwr-adp on 2024_05_17-16.33.07; build 2022 2021_09_15-19.57.30 176069
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].parts['layer'].features['Solid extrude-1'].setValues(
+    depth=0.002)
+mdb.models['Model-1'].parts['layer'].regenerate()
+mdb.models['Model-1'].parts['layer'].generateMesh()
+mdb.models['Model-1'].parts['layer'].Set(faces=
+    mdb.models['Model-1'].parts['layer'].faces.getSequenceFromMask(('[#1 ]', ), 
+    ), name='contact surface')
+mdb.models['Model-1'].parts['plate'].features['Solid extrude-1'].setValues(
+    depth=0.002)
+mdb.models['Model-1'].parts['plate'].regenerate()
+mdb.models['Model-1'].parts['plate'].generateMesh()
+mdb.models['Model-1'].parts['plate'].Set(name='all_nodes', nodes=
+    mdb.models['Model-1'].parts['plate'].nodes.getSequenceFromMask(mask=(
+    '[#ffffffff:34 #3ff ]', ), ))
+mdb.models['Model-1'].parts['plate'].Set(name='one_node', nodes=
+    mdb.models['Model-1'].parts['plate'].nodes.getSequenceFromMask(mask=(
+    '[#0:18 #800000 ]', ), ))
+mdb.models['Model-1'].parts['plate'].Set(name='one_node', nodes=
+    mdb.models['Model-1'].parts['plate'].nodes.getSequenceFromMask(mask=(
+    '[#0:17 #2 ]', ), ))
+mdb.models['Model-1'].rootAssembly.regenerate()
+mdb.models['Model-1'].rootAssembly.Set(faces=
+    mdb.models['Model-1'].rootAssembly.instances['layer-1'].faces.getSequenceFromMask(
+    ('[#2 ]', ), ), name='Set-10')
+mdb.models['Model-1'].boundaryConditions['fix inner layer'].setValues(region=
+    mdb.models['Model-1'].rootAssembly.sets['Set-10'])
+mdb.models['Model-1'].rootAssembly.Set(faces=
+    mdb.models['Model-1'].rootAssembly.instances['plate-1'].faces.getSequenceFromMask(
+    ('[#4 ]', ), ), name='Set-11')
+mdb.models['Model-1'].boundaryConditions['step1000'].setValues(region=
+    mdb.models['Model-1'].rootAssembly.sets['Set-11'])
+mdb.models['Model-1'].rootAssembly.Set(faces=
+    mdb.models['Model-1'].rootAssembly.instances['plate-1'].faces.getSequenceFromMask(
+    ('[#4 ]', ), ), name='Set-12')
+mdb.models['Model-1'].boundaryConditions['step1250'].setValues(region=
+    mdb.models['Model-1'].rootAssembly.sets['Set-12'])
+mdb.jobs['press'].submit(consistencyChecking=OFF)
+mdb.jobs['press']._Message(STARTED, {'phase': BATCHPRE_PHASE, 
+    'clientHost': 'AZL-RWTH-D-0002', 'handle': 0, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'SECONDARY SURFACE ASSEMBLY_PLATE-1_ALL_NODES_CNS_ IS A NODE-BASED SURFACE USED WITH SURFACE TO SURFACE APPROACH.  IN ORDER TO OBTAIN IMPROVED STRESS ACCURACY WITH THIS APPROACH, AN ELEMENT-BASED SURFACE SHOULD BE USED INSTEAD.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR *TIE PAIR (ASSEMBLY_PLATE-1_ALL_NODES_CNS_-ASSEMBLY_M_SET-1_CNS_), ADJUSTMENT WAS SPECIFIED BUT NO NODE WAS ADJUSTED MORE THAN THE ADJUSTMENT DISTANCE = 2.22000E-16.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': '1098 nodes are either missing intersection with their respective main surface or are outside the adjust zone. The nodes have been identified in node set WarnNodeMissMainIntersect.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'OUTPUT REQUEST CF HAS BEEN REMOVED AS THERE ARE NO APPLICABLE LOADS IN THIS STEP', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FILE, {'phase': BATCHPRE_PHASE, 
+    'file': 'C:\\mmd\\Abaqus 3D Sim\\2x 3D\\press.odb', 'jobName': 'press'})
+mdb.jobs['press']._Message(COMPLETED, {'phase': BATCHPRE_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'press'})
+mdb.jobs['press']._Message(STARTED, {'phase': STANDARD_PHASE, 
+    'clientHost': 'AZL-RWTH-D-0002', 'handle': 11936, 'jobName': 'press'})
+mdb.jobs['press']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'press', 'memory': 260.0})
+mdb.jobs['press']._Message(PHYSICAL_MEMORY, {'phase': STANDARD_PHASE, 
+    'physical_memory': 7878.0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MINIMUM_MEMORY, {'minimum_memory': 42.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 1135 INSTANCE LAYER-1 INTERNAL NODE 8890 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9033 INSTANCE LAYER-1 INTERNAL NODE 992 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4229 INSTANCE LAYER-1 INTERNAL NODE 5796 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_1_1_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 1135 INSTANCE LAYER-1 INTERNAL NODE 8890 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9033 INSTANCE LAYER-1 INTERNAL NODE 992 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4229 INSTANCE LAYER-1 INTERNAL NODE 5796 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_1_1_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 1135 INSTANCE LAYER-1 INTERNAL NODE 8890 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9033 INSTANCE LAYER-1 INTERNAL NODE 992 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4229 INSTANCE LAYER-1 INTERNAL NODE 5796 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_1_2_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 1135 INSTANCE LAYER-1 INTERNAL NODE 8890 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9033 INSTANCE LAYER-1 INTERNAL NODE 992 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4229 INSTANCE LAYER-1 INTERNAL NODE 5796 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_1_3_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 1135 INSTANCE LAYER-1 INTERNAL NODE 8890 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9033 INSTANCE LAYER-1 INTERNAL NODE 992 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4229 INSTANCE LAYER-1 INTERNAL NODE 5796 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_1_4_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.01, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 1, 'stepTime': 0.01, 'step': 1, 
+    'jobName': 'press', 'severe': 1, 'iterations': 5, 'phase': STANDARD_PHASE, 
+    'equilibrium': 4})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 1, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 1135 INSTANCE LAYER-1 INTERNAL NODE 8890 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9033 INSTANCE LAYER-1 INTERNAL NODE 992 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4229 INSTANCE LAYER-1 INTERNAL NODE 5796 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_2_1_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 1135 INSTANCE LAYER-1 INTERNAL NODE 8890 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9033 INSTANCE LAYER-1 INTERNAL NODE 992 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4229 INSTANCE LAYER-1 INTERNAL NODE 5796 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_2_1_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 1135 INSTANCE LAYER-1 INTERNAL NODE 8890 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9033 INSTANCE LAYER-1 INTERNAL NODE 992 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4229 INSTANCE LAYER-1 INTERNAL NODE 5796 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_2_2_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.02, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 2, 'stepTime': 0.02, 'step': 1, 
+    'jobName': 'press', 'severe': 1, 'iterations': 3, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 2, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 1135 INSTANCE LAYER-1 INTERNAL NODE 8890 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9033 INSTANCE LAYER-1 INTERNAL NODE 992 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4229 INSTANCE LAYER-1 INTERNAL NODE 5796 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_3_1_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 1135 INSTANCE LAYER-1 INTERNAL NODE 8890 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9033 INSTANCE LAYER-1 INTERNAL NODE 992 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4229 INSTANCE LAYER-1 INTERNAL NODE 5796 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_3_1_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 1135 INSTANCE LAYER-1 INTERNAL NODE 8890 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9033 INSTANCE LAYER-1 INTERNAL NODE 992 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4229 INSTANCE LAYER-1 INTERNAL NODE 5796 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_3_2_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.03, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 3, 'stepTime': 0.03, 'step': 1, 
+    'jobName': 'press', 'severe': 1, 'iterations': 3, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 3, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 1135 INSTANCE LAYER-1 INTERNAL NODE 8890 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9033 INSTANCE LAYER-1 INTERNAL NODE 992 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4229 INSTANCE LAYER-1 INTERNAL NODE 5796 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_4_1_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 5939 INSTANCE LAYER-1 INTERNAL NODE 4086 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'OVERCONSTRAINT CHECKS: THE MAXIMUM NUMBER OF ZERO PIVOT-BASED OVERCONSTRAINT CHECKS MESSAGES PRINTED FOR THIS STEP HAS BEEN REACHED. THE OUTPUT OF THESE MESSAGES IS SUPRESSED UNTIL THE END OF THE STEP TO AVOID POTENTIALLY LARGE INCREASES IN THE SYSTEM TIME NEEDED TO COMPLETE THE ANALYSIS.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 1 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_1_4_1_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.04, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 4, 'stepTime': 0.04, 'step': 1, 
+    'jobName': 'press', 'severe': 1, 'iterations': 3, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 4, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.05, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 5, 'stepTime': 0.05, 'step': 1, 
+    'jobName': 'press', 'severe': 1, 'iterations': 3, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 5, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.06, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 6, 'stepTime': 0.06, 'step': 1, 
+    'jobName': 'press', 'severe': 0, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 6, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.07, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 7, 'stepTime': 0.07, 'step': 1, 
+    'jobName': 'press', 'severe': 0, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 7, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.5939 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.1135 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9033 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4229 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9574 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4770 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9499 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4695 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9574 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4770 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9499 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4695 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.08, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 8, 'stepTime': 0.08, 'step': 1, 
+    'jobName': 'press', 'severe': 1, 'iterations': 3, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 8, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9574 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4770 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9499 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4695 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9574 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4770 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9499 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4695 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.09, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 9, 'stepTime': 0.09, 'step': 1, 
+    'jobName': 'press', 'severe': 0, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 9, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9574 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4770 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9499 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4695 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 10, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.1, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 10, 'stepTime': 0.1, 'step': 1, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 2, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 1, 
+    'frame': 0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'press', 'memory': 261.0})
+mdb.jobs['press']._Message(PHYSICAL_MEMORY, {'phase': STANDARD_PHASE, 
+    'physical_memory': 7878.0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MINIMUM_MEMORY, {'minimum_memory': 42.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9574 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4770 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9499 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4695 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9574 INSTANCE LAYER-1 INTERNAL NODE 451 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4770 INSTANCE LAYER-1 INTERNAL NODE 5255 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9499 INSTANCE LAYER-1 INTERNAL NODE 526 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4695 INSTANCE LAYER-1 INTERNAL NODE 5330 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_2_1_1_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9574 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4770 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9499 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4695 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9574 INSTANCE LAYER-1 INTERNAL NODE 451 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4770 INSTANCE LAYER-1 INTERNAL NODE 5255 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9499 INSTANCE LAYER-1 INTERNAL NODE 526 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4695 INSTANCE LAYER-1 INTERNAL NODE 5330 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_2_1_2_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.11, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 1, 'stepTime': 0.01, 'step': 2, 
+    'jobName': 'press', 'severe': 0, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 1, 
+    'frame': 1, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9574 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4770 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9499 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4695 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9574 INSTANCE LAYER-1 INTERNAL NODE 451 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4770 INSTANCE LAYER-1 INTERNAL NODE 5255 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 9499 INSTANCE LAYER-1 INTERNAL NODE 526 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'SOLVER PROBLEM.  ZERO PIVOT WHEN PROCESSING ELEMENT 4695 INSTANCE LAYER-1 INTERNAL NODE 5330 D.O.F. 1', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing D.O.F. 1 at one or more of the internal nodes of 4 elements. The elements have been identified in element set WarnElemSolvProbZeroPiv_1_2_2_1_1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.12, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 2, 'stepTime': 0.02, 'step': 2, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 1, 
+    'frame': 2, 'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.9574 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(WARNING, {'phase': STANDARD_PHASE, 
+    'message': 'Solver problem. Zero pivot when processing element LAYER-1.4770 D.O.F. 1.', 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.13, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 3, 'stepTime': 0.03, 'step': 2, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 1, 
+    'frame': 3, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.14, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 4, 'stepTime': 0.04, 'step': 2, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 1, 
+    'frame': 4, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.15, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 5, 'stepTime': 0.05, 'step': 2, 
+    'jobName': 'press', 'severe': 1, 'iterations': 3, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 1, 
+    'frame': 5, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.16, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 6, 'stepTime': 0.06, 'step': 2, 
+    'jobName': 'press', 'severe': 0, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 1, 
+    'frame': 6, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.17, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 7, 'stepTime': 0.07, 'step': 2, 
+    'jobName': 'press', 'severe': 1, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 1, 
+    'frame': 7, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.18, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 8, 'stepTime': 0.08, 'step': 2, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 1, 
+    'frame': 8, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.19, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 9, 'stepTime': 0.09, 'step': 2, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 1, 
+    'frame': 9, 'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 1, 
+    'frame': 10, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.2, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 10, 'stepTime': 0.1, 'step': 2, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 2, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 3, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 2, 
+    'frame': 0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'press', 'memory': 263.0})
+mdb.jobs['press']._Message(PHYSICAL_MEMORY, {'phase': STANDARD_PHASE, 
+    'physical_memory': 7878.0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MINIMUM_MEMORY, {'minimum_memory': 42.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.21, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 1, 'stepTime': 0.01, 'step': 3, 
+    'jobName': 'press', 'severe': 0, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 2, 
+    'frame': 1, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.22, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 2, 'stepTime': 0.02, 'step': 3, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 2, 
+    'frame': 2, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.23, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 3, 'stepTime': 0.03, 'step': 3, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 2, 
+    'frame': 3, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.24, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 4, 'stepTime': 0.04, 'step': 3, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 2, 
+    'frame': 4, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.25, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 5, 'stepTime': 0.05, 'step': 3, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 2, 
+    'frame': 5, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.26, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 6, 'stepTime': 0.06, 'step': 3, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 2, 
+    'frame': 6, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.27, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 7, 'stepTime': 0.07, 'step': 3, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 2, 
+    'frame': 7, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.28, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 8, 'stepTime': 0.08, 'step': 3, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 2, 
+    'frame': 8, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.29, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 9, 'stepTime': 0.09, 'step': 3, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 2, 
+    'frame': 9, 'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 2, 
+    'frame': 10, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.3, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 10, 'stepTime': 0.1, 'step': 3, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 3, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 4, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 3, 
+    'frame': 0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'press', 'memory': 263.0})
+mdb.jobs['press']._Message(PHYSICAL_MEMORY, {'phase': STANDARD_PHASE, 
+    'physical_memory': 7878.0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MINIMUM_MEMORY, {'minimum_memory': 42.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.31, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 1, 'stepTime': 0.01, 'step': 4, 
+    'jobName': 'press', 'severe': 0, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 3, 
+    'frame': 1, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.32, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 2, 'stepTime': 0.02, 'step': 4, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 3, 
+    'frame': 2, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.33, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 3, 'stepTime': 0.03, 'step': 4, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 3, 
+    'frame': 3, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.34, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 4, 'stepTime': 0.04, 'step': 4, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 3, 
+    'frame': 4, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.35, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 5, 'stepTime': 0.05, 'step': 4, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 3, 
+    'frame': 5, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.36, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 6, 'stepTime': 0.06, 'step': 4, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 3, 
+    'frame': 6, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.37, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 7, 'stepTime': 0.07, 'step': 4, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 3, 
+    'frame': 7, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.38, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 8, 'stepTime': 0.08, 'step': 4, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 3, 
+    'frame': 8, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.39, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 9, 'stepTime': 0.09, 'step': 4, 
+    'jobName': 'press', 'severe': 1, 'iterations': 3, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 3, 
+    'frame': 9, 'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 3, 
+    'frame': 10, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.4, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 10, 'stepTime': 0.1, 'step': 4, 
+    'jobName': 'press', 'severe': 0, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 4, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 5, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 4, 
+    'frame': 0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'press', 'memory': 264.0})
+mdb.jobs['press']._Message(PHYSICAL_MEMORY, {'phase': STANDARD_PHASE, 
+    'physical_memory': 7878.0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MINIMUM_MEMORY, {'minimum_memory': 42.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.41, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 1, 'stepTime': 0.01, 'step': 5, 
+    'jobName': 'press', 'severe': 1, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 4, 
+    'frame': 1, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.42, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 2, 'stepTime': 0.02, 'step': 5, 
+    'jobName': 'press', 'severe': 0, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 4, 
+    'frame': 2, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.43, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 3, 'stepTime': 0.03, 'step': 5, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 4, 
+    'frame': 3, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.44, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 4, 'stepTime': 0.04, 'step': 5, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 4, 
+    'frame': 4, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.45, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 5, 'stepTime': 0.05, 'step': 5, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 4, 
+    'frame': 5, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.46, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 6, 'stepTime': 0.06, 'step': 5, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 4, 
+    'frame': 6, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.47, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 7, 'stepTime': 0.07, 'step': 5, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 4, 
+    'frame': 7, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.48, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 8, 'stepTime': 0.08, 'step': 5, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 4, 
+    'frame': 8, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.49, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 9, 'stepTime': 0.09, 'step': 5, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 4, 
+    'frame': 9, 'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 4, 
+    'frame': 10, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.5, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 10, 'stepTime': 0.1, 'step': 5, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 5, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 6, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 5, 
+    'frame': 0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'press', 'memory': 264.0})
+mdb.jobs['press']._Message(PHYSICAL_MEMORY, {'phase': STANDARD_PHASE, 
+    'physical_memory': 7878.0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MINIMUM_MEMORY, {'minimum_memory': 42.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.51, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 1, 'stepTime': 0.01, 'step': 6, 
+    'jobName': 'press', 'severe': 0, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 5, 
+    'frame': 1, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.52, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 2, 'stepTime': 0.02, 'step': 6, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 5, 
+    'frame': 2, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.53, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 3, 'stepTime': 0.03, 'step': 6, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 5, 
+    'frame': 3, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.54, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 4, 'stepTime': 0.04, 'step': 6, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 5, 
+    'frame': 4, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.55, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 5, 'stepTime': 0.05, 'step': 6, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 5, 
+    'frame': 5, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.56, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 6, 'stepTime': 0.06, 'step': 6, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 5, 
+    'frame': 6, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.57, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 7, 'stepTime': 0.07, 'step': 6, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 5, 
+    'frame': 7, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.58, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 8, 'stepTime': 0.08, 'step': 6, 
+    'jobName': 'press', 'severe': 1, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 0})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 5, 
+    'frame': 8, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.59, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 9, 'stepTime': 0.09, 'step': 6, 
+    'jobName': 'press', 'severe': 2, 'iterations': 3, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 5, 
+    'frame': 9, 'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 5, 
+    'frame': 10, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.6, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 10, 'stepTime': 0.1, 'step': 6, 
+    'jobName': 'press', 'severe': 1, 'iterations': 3, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 6, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 7, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 6, 
+    'frame': 0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'press', 'memory': 267.0})
+mdb.jobs['press']._Message(PHYSICAL_MEMORY, {'phase': STANDARD_PHASE, 
+    'physical_memory': 7878.0, 'jobName': 'press'})
+mdb.jobs['press']._Message(MINIMUM_MEMORY, {'minimum_memory': 42.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.61, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 1, 'stepTime': 0.01, 'step': 7, 
+    'jobName': 'press', 'severe': 0, 'iterations': 2, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 6, 
+    'frame': 1, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.62, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 2, 'stepTime': 0.02, 'step': 7, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 6, 
+    'frame': 2, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.63, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 3, 'stepTime': 0.03, 'step': 7, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 6, 
+    'frame': 3, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.64, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 4, 'stepTime': 0.04, 'step': 7, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 6, 
+    'frame': 4, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.65, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 5, 'stepTime': 0.05, 'step': 7, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 6, 
+    'frame': 5, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.66, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 6, 'stepTime': 0.06, 'step': 7, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 6, 
+    'frame': 6, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.67, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 7, 'stepTime': 0.07, 'step': 7, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 6, 
+    'frame': 7, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.68, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 8, 'stepTime': 0.08, 'step': 7, 
+    'jobName': 'press', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 6, 
+    'frame': 8, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.69, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 9, 'stepTime': 0.09, 'step': 7, 
+    'jobName': 'press', 'severe': 1, 'iterations': 3, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 6, 
+    'frame': 9, 'jobName': 'press'})
+mdb.jobs['press']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 6, 
+    'frame': 10, 'jobName': 'press'})
+mdb.jobs['press']._Message(STATUS, {'totalTime': 0.7, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 10, 'stepTime': 0.1, 'step': 7, 
+    'jobName': 'press', 'severe': 1, 'iterations': 3, 'phase': STANDARD_PHASE, 
+    'equilibrium': 2})
+mdb.jobs['press']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 7, 
+    'jobName': 'press'})
+mdb.jobs['press']._Message(COMPLETED, {'phase': STANDARD_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'press'})
+mdb.jobs['press']._Message(JOB_COMPLETED, {'time': 'Fri May 17 16:38:38 2024', 
+    'jobName': 'press'})
+# Save by pwr-adp on 2024_05_17-16.39.59; build 2022 2021_09_15-19.57.30 176069
+# Save by pwr-adp on 2024_05_17-17.17.30; build 2022 2021_09_15-19.57.30 176069
