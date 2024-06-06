@@ -1,0 +1,51 @@
+# -*- coding: mbcs -*-
+#
+# Abaqus/CAE Release 2022 replay file
+# Internal Version: 2021_09_15-19.57.30 176069
+# Run by caber on Sun May 19 10:56:53 2024
+#
+
+# from driverUtils import executeOnCaeGraphicsStartup
+# executeOnCaeGraphicsStartup()
+#: Executing "onCaeGraphicsStartup()" in the site directory ...
+from abaqus import *
+from abaqusConstants import *
+session.Viewport(name='Viewport: 1', origin=(0.0, 0.0), width=196.823425292969, 
+    height=225.399993896484)
+session.viewports['Viewport: 1'].makeCurrent()
+session.viewports['Viewport: 1'].maximize()
+from caeModules import *
+from driverUtils import executeOnCaeStartup
+executeOnCaeStartup()
+openMdb('2X 3D Sim.cae')
+#: The model database "F:\Projektarbeit\Abaqus\Simulation\2X 3D ver1\2X 3D Sim.cae" has been opened.
+session.viewports['Viewport: 1'].setValues(displayedObject=None)
+session.viewports['Viewport: 1'].partDisplay.geometryOptions.setValues(
+    referenceRepresentation=ON)
+p = mdb.models['Model-1'].parts['layer']
+session.viewports['Viewport: 1'].setValues(displayedObject=p)
+a = mdb.models['Model-1'].rootAssembly
+session.viewports['Viewport: 1'].setValues(displayedObject=a)
+session.viewports['Viewport: 1'].assemblyDisplay.setValues(
+    optimizationTasks=OFF, geometricRestrictions=OFF, stopConditions=OFF)
+mdb.jobs['press'].submit(consistencyChecking=OFF)
+#: The job input file "press.inp" has been submitted for analysis.
+#: Job press: Analysis Input File Processor completed successfully.
+#: Job press: Abaqus/Standard completed successfully.
+#: Job press completed successfully. 
+session.viewports['Viewport: 1'].assemblyDisplay.setValues(step='step1250')
+mdb.models['Model-1'].steps['step1250'].suppress()
+mdb.models['Model-1'].steps['step1500'].suppress()
+mdb.models['Model-1'].steps['step1750'].suppress()
+mdb.models['Model-1'].steps['step2000'].suppress()
+mdb.models['Model-1'].steps['step3000'].suppress()
+mdb.models['Model-1'].steps['step4000'].suppress()
+session.viewports['Viewport: 1'].assemblyDisplay.setValues(step='Initial')
+session.viewports['Viewport: 1'].assemblyDisplay.setValues(
+    adaptiveMeshConstraints=ON)
+session.viewports['Viewport: 1'].assemblyDisplay.setValues(loads=ON, bcs=ON, 
+    predefinedFields=ON, connectors=ON, adaptiveMeshConstraints=OFF)
+mdb.models['Model-1'].boundaryConditions['step1000'].move('step1000', 
+    'Initial')
+#* ValueError: Non-zero boundary condition in initial step.
+session.viewports['Viewport: 1'].assemblyDisplay.setValues(step='step1000')
