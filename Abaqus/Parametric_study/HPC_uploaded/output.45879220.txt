@@ -1,0 +1,6 @@
+This software can only be used with a valid license. You need to be registered
+individually in order to use your institute's license. Access can only be
+requested by your institute's IT administrator via
+[servicedesk@itc.rwth-aachen.de].
+
+[INFO] Module ABAQUS/2022 loaded.

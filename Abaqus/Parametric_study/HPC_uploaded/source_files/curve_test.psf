@@ -1,0 +1,13 @@
+# CREATE STUDY
+walze=ParStudy(par=('C10'))
+# DEFINE THE PARAMETERS
+walze.define(CONTINUOUS, par = 'C10', domain = (1e5, 4e6))
+#sampling
+walze.sample(NUMBER, par = 'C10', number = 79)
+#combine the samples
+walze.combine(MESH, name = 'variation')
+#generate analysis job data
+walze.generate(template = 'curve_test')
+#execute the jobs
+walze.execute(ALL, execOptions='cpus=2')
+
