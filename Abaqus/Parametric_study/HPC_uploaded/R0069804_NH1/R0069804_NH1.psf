@@ -7,7 +7,7 @@ walze.sample(NUMBER, par = 'C10', number = 79)
 #combine the samples
 walze.combine(MESH, name = 'variation')
 #generate analysis job data
-walze.generate(template = 'curve_test')
+walze.generate(template = 'R0069804_NH1')
 #execute the jobs
 walze.execute(ALL, execOptions='cpus=2')
 

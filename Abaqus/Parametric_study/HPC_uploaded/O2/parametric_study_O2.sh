@@ -2,7 +2,7 @@
 
 ### Start of Slurm SBATCH definitions
 ### Maximum runtime
-#SBATCH --time=8:00:00
+#SBATCH --time=40:00:00
 
 ### Ask for --ntask cpus (tasks in Slurm terms) across nodes
 #SBATCH --ntasks=2
@@ -12,7 +12,7 @@
 #SBATCH --mem-per-cpu=512M
 
 ### Name the job
-#SBATCH --job-name=projektarbeit_neo_hook_1
+#SBATCH --job-name=projektarbeit_ogden_2
 
 ### Declare an output STDOUT/STDERR file
 #SBATCH --output=output.%J.txt
@@ -32,14 +32,12 @@ export ABAQUS_MEM_ARG="3584 mb"
 
 
 ### name your job HERE, name it DIFFERENT from your input file!
-JOBNAME=neo_hook_1
-INPUTFILE=curve_test.psf
+JOBNAME=curve_test_O2
+INPUTFILE=curve_test_O2.psf
 
 
 ### Execute your application
 ### Please remember, to adjust the memory, it must be less than the total requested memory
-abaqus script=curve_test.psf > curve_test.log
+abaqus script=$JOBNAME.psf > $JOBNAME.log
 mkdir -p results
 mv *.odb results/
-cd ..
-mv Curve_test /hpcwork/ys271564/Projektarbeit

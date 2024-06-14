@@ -1,0 +1,17 @@
+# CREATE STUDY
+MR=ParStudy(par=('mu1', 'alpha1'))
+# DEFINE THE PARAMETERS
+MR.define(CONTINUOUS, par = 'mu1', domain = (1e5, 4e6))
+MR.define(CONTINUOUS, par = 'alpha1', domain = (0, 10))
+#MR.define(CONTINUOUS, par = 'D1', domain = (0, 0.25))
+#sampling
+MR.sample(NUMBER, par = 'mu1', number = 14)
+MR.sample(NUMBER, par = 'alpha1', number = 21)
+#MR.sample(NUMBER, par = 'D1', number = 2)
+#combine the samples
+MR.combine(MESH, name = 'variation')
+#generate analysis job data
+MR.generate(template = 'curve_test_O2')
+#execute the jobs
+MR.execute(ALL, execOptions='cpus=2')
+
