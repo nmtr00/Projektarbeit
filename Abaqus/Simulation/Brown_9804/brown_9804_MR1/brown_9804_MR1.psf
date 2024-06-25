@@ -1,0 +1,15 @@
+# CREATE STUDY
+MR=ParStudy(par=('C10', 'C01'))
+# DEFINE THE PARAMETERS
+MR.define(CONTINUOUS, par = 'C10', domain = (1e5, 2e6))
+MR.define(CONTINUOUS, par = 'C01', domain = (1e4, 2e5))
+#sampling
+MR.sample(NUMBER, par = 'C10', number = 20)
+MR.sample(NUMBER, par = 'C01', number = 20)
+#combine the samples
+MR.combine(MESH, name = 'variation')
+#generate analysis job data
+MR.generate(template = 'brrown_9804_MR1')
+#execute the jobs
+MR.execute(ALL, execOptions='cpus=2')
+
